@@ -1,0 +1,6 @@
+streamlit
+supabase
+requests
+schedule
+resend
+python-dotenv
