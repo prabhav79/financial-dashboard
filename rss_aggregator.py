@@ -5,8 +5,13 @@ from datetime import datetime, timezone
 import email.utils
 
 def fetch_google_news(query):
+    # Enclose the query in quotes for an exact phrase match
+    # and append terms that filter for business/financial news
+    # to avoid generic words like "Elevate" returning random articles.
+    advanced_query = f'"{query}" (stock OR earnings OR company OR financial)'
+    
     # Google News RSS format
-    url = f"https://news.google.com/rss/search?q={quote(query)}&hl=en-US&gl=US&ceid=US:en"
+    url = f"https://news.google.com/rss/search?q={quote(advanced_query)}&hl=en-US&gl=US&ceid=US:en"
     try:
         response = requests.get(url, timeout=10)
         response.raise_for_status()
